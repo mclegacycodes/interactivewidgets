@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO 9: Wrap inside a Consumer Widget
+    
     // 1
 return Consumer<TabManager>(builder: (context, tabManager, child) {
  return Scaffold(
