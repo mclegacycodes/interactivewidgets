@@ -28,8 +28,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     // TODO 9: Wrap inside a Consumer Widget
     // 1
-return Consumer<TabManager>(builder: (context, tabManager, 
-child) {
+return Consumer<TabManager>(builder: (context, tabManager, child) {
  return Scaffold(
  appBar: AppBar(
  title: Text(
@@ -38,7 +37,7 @@ child) {
  ),
  ),
  // 2
- // TODO: Replace body
+ 
  body: pages[tabManager.selectedTab],
  bottomNavigationBar: BottomNavigationBar(
  selectedItemColor: Theme.of(context)
