@@ -94,8 +94,8 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           children: [
             buildNameField(),
             buildImportanceField(),
-            // TODO 15: Add date picker
-            // TODO 16: Add time picker
+            buildDateField(context),
+            buildTimeField(context),
             // TODO 17: Add color picker
             // TODO 18: Add slider
             // TODO: 19: Add Grocery Tile
@@ -172,8 +172,78 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
       ],
     );
   }
-  // TODO: ADD buildDateField()
-  // TODO: Add buildTimeField()
+
+  Widget buildDateField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 2
+        Row(
+          // 3
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // 4
+            Text(
+              'Date',
+              style: GoogleFonts.lato(fontSize: 28.0),
+            ),
+            // 5
+            TextButton(
+              child: const Text('Select'),
+              // 6
+              onPressed: () async {
+                final currentDate = DateTime.now();
+                // 7
+                final selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: currentDate,
+                  firstDate: currentDate,
+                  lastDate: DateTime(currentDate.year + 5),
+                );
+                // 8
+                setState(() {
+                  if (selectedDate != null) {
+                    _dueDate = selectedDate;
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+        // 9
+        Text('${DateFormat('yyyy-MM-dd').format(_dueDate)}'),
+      ],
+    );
+  }
+
+  Widget buildTimeField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Time of Day',
+              style: GoogleFonts.lato(fontSize: 28.0),
+            ),
+            TextButton(
+                onPressed: () async {
+                  final timeOfDay = await showTimePicker(
+                      context: context, initialTime: TimeOfDay.now());
+                  setState(() {
+                    if (timeOfDay != null) {
+                      _timeOfDay = timeOfDay;
+                    }
+                  });
+                },
+                child: const Text('Select'))
+          ],
+        ),
+        Text('${_timeOfDay.format(context)}')
+      ],
+    );
+  }
   // TODO: Add buildColorPicker()
   // TODO: Add buildQuantityField()
 }
